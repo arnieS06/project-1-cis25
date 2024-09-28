@@ -10,17 +10,40 @@ int drawHand(string playerType) {
     int firstCard = (rand() % 13) + 1;
     int secondCard = (rand() % 13) + 1;
 
-    
+    cout << playerType << "'s first card was " << cardToString(firstCard) << endl;
+    cout << playerType << "'s second card was " << cardToString(secondCard) << endl;
+
+    return cardValue(firstCard) + cardValue(secondCard);
 }
 
 string cardToString(int card) {
-// thinking of using switch statement so far
-
+    switch (card) {
+        case 1: 
+            return "A";
+        case 11: 
+            return "J";
+        case 12: 
+            return "Q";
+        case 13: 
+            return "K";
+        default: 
+            return to_string(card);
+    }
 }
 // this function ill use to assign card values
 // some cards are worth a letter
 int cardValue(int card) {
+    if (card == 1) {
+        return 11;
+    }
+    
+    else if(card > 10) {
+        return 10;
+    }
 
+    else {
+        return card;
+    }
 
 }
 
