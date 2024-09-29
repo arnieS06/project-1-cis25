@@ -4,7 +4,6 @@
 #include <string>
 using namespace std;
 
-
 // functiton makes the random card numbers from 1 - 13
 int drawHand(string playerType) {
     int firstCard = (rand() % 13) + 1;
@@ -48,7 +47,21 @@ int cardValue(int card) {
 }
 
 void findWinner(int playerSum, int dealerSum, string playerName) {
-    //using this function to find final winner i dont need a return type yet
+    //using this function to find final winner 
+    cout << "\n Total player: " << playerSum << endl;
+    cout << "Total Dealer: " << dealerSum << endl;
+
+    if (playerSum > dealerSum) {
+        cout << playerName << " wins!" << endl;
+    }
+
+    else if (dealerSum > playerSum) {
+        cout << "Dealer wins!" << endl;
+    }
+
+    else {
+        cout << "Draw, no one wins." << endl;
+    }
 }
 
 int main() {
@@ -61,5 +74,11 @@ int main() {
     // find the winner for that round
     // ask them to play again?
     // break the program if they say no
+    string player;
+
+    cout << "Welcome to blackjack, please enter your name -> ";
+    getline(cin, player);
+
+    
 }
 
