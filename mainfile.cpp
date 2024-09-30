@@ -74,10 +74,46 @@ int main() {
     // find the winner for that round
     // ask them to play again?
     // break the program if they say no
+
+    
+    srand(time(0));
+
+    bool playAgain = true;
     string player;
 
     cout << "Welcome to blackjack, please enter your name -> ";
     getline(cin, player);
+
+    cout << "\n" << player << "'s hand: \n";
+    int playerSum = drawHand(player);
+
+    if (playerSum == 21) {
+        cout << "\n Blackjack!!";
+    }
+
+    cout << "\nDealer's hand: \n";
+    int dealerSum = drawHand("Dealer");
+
+    if (dealerSum == 21) {
+        cout << "Dealer has gotten blackjack!\n";
+    } 
+
+    // finding the winner 
+
+    determineWinner(playerSum, dealerSum, player);
+
+    cout << "\n Wanna play one more time? (Y/N): ";
+    string playerResponse;
+    getline(cin, playerResponse);
+    if (response != "Y" || response != "y") {
+        playAgain = false;
+        cout << "come play again next time!" << endl;
+    }
+
+
+
+
+
 
     
 }
