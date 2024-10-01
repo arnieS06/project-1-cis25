@@ -1,8 +1,12 @@
 #include <iostream>
-#include <cstlib>
+#include <cstdlib>
 #include <ctime>
 #include <string>
 using namespace std;
+
+
+string cardToString(int card);
+int cardValue(int card);
 
 // functiton makes the random card numbers from 1 - 13
 int drawHand(string playerType) {
@@ -101,21 +105,16 @@ int main() {
 
         // finding the winner 
 
-        determineWinner(playerSum, dealerSum, player);
+        findWinner(playerSum, dealerSum, player);
 
         cout << "\n Wanna play one more time? (Y/N): ";
         string playerResponse;
         getline(cin, playerResponse);
-        if (response != "Y" || response != "y") {
+        if (playerResponse != "Y" && playerResponse != "y") {
             playAgain = false;
             cout << "come play again next time!" << endl;
         }
     }    
-
-
-
-
-
 
 
 
