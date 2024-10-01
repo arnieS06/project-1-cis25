@@ -22,13 +22,13 @@ int drawHand(string playerType) {
 string cardToString(int card) {
     switch (card) {
         case 1: 
-            return "A";
+            return "Ace";
         case 11: 
-            return "J";
+            return "JOKER";
         case 12: 
-            return "Q";
+            return "Queen";
         case 13: 
-            return "K";
+            return "King";
         default: 
             return to_string(card);
     }
@@ -52,8 +52,8 @@ int cardValue(int card) {
 
 void findWinner(int playerSum, int dealerSum, string playerName) {
     //using this function to find final winner 
-    cout << "\n Total player: " << playerSum << endl;
-    cout << "Total Dealer: " << dealerSum << endl;
+    cout << "\nSum of player's cards: " << playerSum << endl;
+    cout << "Sum of dealer's cards: " << dealerSum << endl;
 
     if (playerSum > dealerSum) {
         cout << playerName << " wins!" << endl;
@@ -84,6 +84,8 @@ int main() {
 
     bool playAgain = true;
     string player;
+    string playerResponse;
+
 
     while (playAgain) {
         cout << "Welcome to blackjack, please enter your name -> ";
@@ -100,7 +102,7 @@ int main() {
         int dealerSum = drawHand("Dealer");
 
         if (dealerSum == 21) {
-        cout << "Dealer has gotten blackjack!\n";
+            cout << "Dealer has gotten blackjack!\n";
         } 
 
         // finding the winner 
@@ -108,7 +110,6 @@ int main() {
         findWinner(playerSum, dealerSum, player);
 
         cout << "\n Wanna play one more time? (Y/N): ";
-        string playerResponse;
         getline(cin, playerResponse);
         if (playerResponse != "Y" && playerResponse != "y") {
             playAgain = false;
