@@ -24,7 +24,7 @@ string cardToString(int card) {
         case 1: 
             return "Ace";
         case 11: 
-            return "JOKER";
+            return "JACK";
         case 12: 
             return "Queen";
         case 13: 
@@ -50,13 +50,14 @@ int cardValue(int card) {
 
 }
 
-void findWinner(int playerSum, int dealerSum, string playerName) {
+void findWinner(int playerSum, int dealerSum, string playerName, bool &playerWin) {
     //using this function to find final winner 
     cout << "\nSum of player's cards: " << playerSum << endl;
     cout << "Sum of dealer's cards: " << dealerSum << endl;
 
     if (playerSum > dealerSum) {
         cout << playerName << " wins!" << endl;
+        playerWin = true;
     }
 
     else if (dealerSum > playerSum) {
@@ -68,34 +69,46 @@ void findWinner(int playerSum, int dealerSum, string playerName) {
     }
 }
 
+void betWinner(int playerBet, bool playerWin) {
+    if (playerWin) {
+        cout << "Looks like the dealer owes you your money,\n";
+        cout << "go and get the " << playerBet << "$ you won!" << endl;
+    }
+
+    else {
+        cout << "Seems like you won no money,\n";
+        cout << "you must've drawn or lost the round.\n";
+        cout << "Time to pay the dealer " << playerBet << "$" << endl;
+    }
+}
+
 int main() {
-
-    // ask for input 
-    // draw hand
-    // use card value and assign values to all drawn cards
-    // see if cards could have special values like letters
-    // compare sum of cards
-    // find the winner for that round
-    // ask them to play again?
-    // break the program if they say no
-
     
     srand(time(0));
 
     bool playAgain = true;
+    bool playerWin;
     string player;
     string playerResponse;
+    int playerBet;
 
 
     while (playAgain) {
+        playerWin = false;
+
         cout << "Welcome to blackjack, please enter your name -> ";
         getline(cin, player);
+        cin.ignore();
+
+        cout << "How many $ do you wanna bet that you'll win this round? -> ";
+        cin >> playerBet;
 
         cout << "\n" << player << "'s hand: \n";
         int playerSum = drawHand(player);
 
         if (playerSum == 21) {
             cout << "\n Blackjack!!";
+            playerWin = true;
         }
 
         cout << "\nDealer's hand: \n";
@@ -105,10 +118,14 @@ int main() {
             cout << "Dealer has gotten blackjack!\n";
         } 
 
-        // finding the winner 
+        // finding the winner of the match
+        findWinner(playerSum, dealerSum, player, playerWin);
 
-        findWinner(playerSum, dealerSum, player);
 
+        // finding the winner of the bet the player placed
+        betWinner(playerBet, playerWin);
+
+        // asking player if they wanna play again
         cout << "\n Wanna play one more time? (Y/N): ";
         getline(cin, playerResponse);
         if (playerResponse != "Y" && playerResponse != "y") {
@@ -116,7 +133,6 @@ int main() {
             cout << "come play again next time!" << endl;
         }
     }    
-
 
 
     
